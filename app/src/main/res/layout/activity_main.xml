@@ -14,12 +14,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="165dp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="688dp" />
+
 
     <TextView
         android:id="@+id/tv_app_version"
@@ -29,7 +24,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
         tools:text="v1.0"/>
 
     <ImageView
@@ -38,6 +32,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:padding="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,8 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="From"
-        android:textColor="@color/black"
+        android:text="@string/from"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/tvFromCurrency"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
@@ -60,8 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="To"
-        android:textColor="@color/black"
+        android:text="@string/to"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/spToCurrency"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
@@ -71,7 +64,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Amount"
+        android:hint="@string/amount"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/tvFromCurrency"
         app:layout_constraintEnd_toStartOf="@+id/tvFromCurrency"
@@ -94,7 +87,6 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:text="EUR"
-        android:textColor="@color/black"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toStartOf="@+id/spToCurrency"
         app:layout_constraintTop_toBottomOf="@+id/tvFrom" />
@@ -112,7 +104,7 @@
         android:id="@+id/btnConvert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Convert"
+        android:text="@string/convert"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spToCurrency" />
@@ -121,7 +113,6 @@
         android:id="@+id/tvResult"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/btnConvert"
         app:layout_constraintEnd_toStartOf="@+id/btnConvert"

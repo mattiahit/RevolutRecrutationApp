@@ -1,5 +1,6 @@
 package pl.mattiahit.revolutrecrutationapp
 
+import android.content.pm.PackageManager
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        binding.tvAppVersion.text = getAppVersion()
 
         binding.btnConvert.setOnClickListener {
             viewModel.converts(
@@ -34,13 +36,17 @@ class MainActivity : AppCompatActivity() {
                 when (event) {
                     is MainViewModel.CurrencyEvent.Success -> {
                         binding.progressBar.isVisible = false
-                        binding.tvResult.setTextColor(Color.BLACK)
                         binding.tvResult.text = event.resultText
                     }
                     is MainViewModel.CurrencyEvent.Failure -> {
                         binding.progressBar.isVisible = false
                         binding.tvResult.setTextColor(Color.RED)
                         binding.tvResult.text = event.errorText
+                    }
+                    is MainViewModel.CurrencyEvent.FailureId -> {
+                        binding.progressBar.isVisible = false
+                        binding.tvResult.setTextColor(Color.RED)
+                        binding.tvResult.text = getString(event.errorTextId)
                     }
                     is MainViewModel.CurrencyEvent.Loading -> {
                         binding.progressBar.isVisible = true
@@ -50,5 +56,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
         setContentView(binding.root)
+    }
+
+    private fun getAppVersion(): String {
+        val manager = this.packageManager
+        val info = manager.getPackageInfo(this.packageName, PackageManager.GET_ACTIVITIES)
+        return info.versionName
     }
 }

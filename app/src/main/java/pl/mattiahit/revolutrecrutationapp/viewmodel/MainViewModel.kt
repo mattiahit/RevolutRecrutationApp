@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import pl.mattiahit.revolutrecrutationapp.R
 import pl.mattiahit.revolutrecrutationapp.model.Rates
 import pl.mattiahit.revolutrecrutationapp.repository.MainRepository
 import pl.mattiahit.revolutrecrutationapp.utils.DispatcherProvider
@@ -22,6 +23,7 @@ class MainViewModel @Inject constructor(
     sealed class CurrencyEvent {
         class Success(val resultText: String): CurrencyEvent()
         class Failure(val errorText: String): CurrencyEvent()
+        class FailureId(val errorTextId: Int): CurrencyEvent()
         object Loading : CurrencyEvent()
         object Empty : CurrencyEvent()
     }
@@ -35,7 +37,7 @@ class MainViewModel @Inject constructor(
     ) {
         val fromAmount = amountStr.toFloatOrNull()
         if(fromAmount == null) {
-            _conversion.value = CurrencyEvent.Failure("Not a Valid amount")
+            _conversion.value = CurrencyEvent.FailureId(R.string.not_a_valid_amount)
             return
         }
 
@@ -45,12 +47,12 @@ class MainViewModel @Inject constructor(
                 is Resource.Error -> _conversion.value = CurrencyEvent.Failure(ratesResponse.message!!)
                 is Resource.Success -> {
                     if(!ratesResponse.data!!.success) {
-                        _conversion.value = CurrencyEvent.Failure("Unexpected Error")
+                        _conversion.value = CurrencyEvent.FailureId(R.string.unexpected_error)
                     } else {
                         val rates = ratesResponse.data.rates
                         val rate = getRateForCurrency(toCurrency, rates)
                         if(rate == null) {
-                            _conversion.value = CurrencyEvent.Failure("Unexpected Error")
+                            _conversion.value = CurrencyEvent.FailureId(R.string.unexpected_error)
                         } else {
                             val convertedCurrency = round(fromAmount * rate as Double * 100) / 100
                             _conversion.value = CurrencyEvent.Success(

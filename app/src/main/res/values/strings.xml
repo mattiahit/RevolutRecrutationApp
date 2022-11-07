@@ -1,7 +1,13 @@
 <resources>
-    <string name="app_name">RevolutRecrutationApp</string>
+    <string name="app_name">Revolut Recrutation App</string>
     <string-array name="currency_codes">
         <item>PLN</item>
         <item>USD</item>
     </string-array>
+    <string name="not_a_valid_amount">Not a Valid amount</string>
+    <string name="convert">Convert</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="amount">amount</string>
+    <string name="unexpected_error">Unexpected Error</string>
 </resources>
